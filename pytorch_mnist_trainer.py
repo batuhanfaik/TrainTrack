@@ -119,6 +119,9 @@ def test(args, model, device, test_loader):
 '''
 Args:
     epoch: index of the current epoch
+    stop_train_flag: TrainTrack bool to check whether the user requested to stop
+                     the training process
+    lr: TrainTrack floating point value to change the learning rate (Initial value: None)
 '''
 def main():
     # Training settings
@@ -182,6 +185,9 @@ def main():
         train(args, model, device, train_loader, optimizer, epoch)
         test(args, model, device, test_loader)
 
+    if args.save_model:
+        torch.save(model.state_dict(), "mnist_cnn.pt")
+
     # Exit conditions handling for TrainTrack
     # Notifies the user whether the training has terminated or finished after completing all epochs
     if TrainTrack.stop_train_flag:
@@ -192,9 +198,6 @@ def main():
         TrainTrack.send_message("Training complete. {} out!".format(TrainTrack.name))
     # Stop TrainTrack Bot instance at the end of training
     TrainTrack.stop_bot()
-
-    if args.save_model:
-        torch.save(model.state_dict(), "mnist_cnn.pt")
 
 
 if __name__ == '__main__':

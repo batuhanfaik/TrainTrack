@@ -114,7 +114,7 @@ class TrainTrack(object):
     def quiet(self, bot, update):
         """ Telegram bot callback for the /quiet command. Stops automatic epoch updates"""
         self.verbose = False
-        update.message.reply_text(" Automatic epoch updates turned off.\n"
+        update.message.reply_text("Automatic epoch updates turned off.\n"
                                   "Send /start to turn epoch updates back on.")
 
     def error(self, update, error):

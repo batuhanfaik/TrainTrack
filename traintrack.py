@@ -40,7 +40,9 @@ class TrainTrack(object):
         self.prereport = True  # Activate pre-report as default
         self.stop_train_flag = False  # Stop training flag
         self.updater = None
-        # # Initialize loss and accuracy monitoring
+        # Initialize status list
+        self.status_list = []
+        # Initialize loss and accuracy monitoring
         self.train_loss = []
         self.test_loss = []
         self.train_acc = []
@@ -134,6 +136,11 @@ class TrainTrack(object):
         """ Function to set a status message to be returned by the /status command """
         assert isinstance(txt, str), 'Status Message must be of type string'
         self._status_message = txt
+        self.status_list.append(self._status_message)
+
+    # Method for clearing status list
+    def clr_status(self):
+        self.status_list.clear()
 
     def update_epoch(self, n):
         assert isinstance(n, int), 'Number of epochs must be of type integer'
@@ -166,10 +173,11 @@ class TrainTrack(object):
 
     def status(self, bot, update):
         """ Telegram bot callback for the /status command. Replies with the latest status"""
+        for state in self.status_list:
+            self._status_message = self._status_message + "\n" + state
         update.message.reply_text(self._status_message)
 
         # Toggling pre-report updates
-
     def toggle_prereport(self, bot, update):
         """ Telegram bot callback for the /toggle_prereport command. Displays verification message with buttons"""
         reply_keyboard = [['On', 'Off']]

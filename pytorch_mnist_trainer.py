@@ -6,12 +6,17 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms
 
+'''
+~~~ Welcome to this network TrainTrack! ~~~
+This is how you import and initiate the TrainTrack Bot
+'''
 # Import TrainTrack Bot
 from traintrack import TrainTrack
 
-telegram_token = "934547307:AAEb1Pqhk2iXvPrs1pLfHCrZTPehSx0dIkU"  # bot's token
-# user id is optional, however highly recommended as it limits the access to you alone.
-telegram_user_id = 734383954  # telegram user id (integer):
+telegram_token = "TOKEN"  # TrainTrack's token
+# User id is optional and can be kept as None.
+# However highly recommended as it limits the access to you alone.
+telegram_user_id = None  # Telegram user id (integer):
 # Create a TrainTrack Bot instance
 TrainTrack = TrainTrack(token=telegram_token, user_id=telegram_user_id)
 # Activate the bot
@@ -43,9 +48,13 @@ class Net(nn.Module):
 Args:
     msg: The update message that prints the results of current epoch at the end of process
          Used to pass as a parameter to the update_message() function
+    train_loss: Keeps track of the running training loss
+    status_msg: Final status of the training process in the current epoch
 '''
 def train(args, model, device, train_loader, optimizer, epoch):
     model.train()
+    # Initialize training loss
+    train_loss = 0
     for batch_idx, (data, target) in enumerate(train_loader):
         data, target = data.to(device), target.to(device)
         optimizer.zero_grad()
@@ -60,21 +69,33 @@ def train(args, model, device, train_loader, optimizer, epoch):
             print(msg)
 
             '''
-            ~~~ Send update messages to the user ~~~
-            With update_message() function you can send your training results to the user
+            ~~~ Send pre-report update messages to the user ~~~
+            With update_prereport() function you can send your training results to the user
             '''
-            TrainTrack.update_message(msg)
+            TrainTrack.update_prereport(msg)
+            # Add up losses
+            train_loss += loss.item()
 
-            '''
-            ~~~ Append train loss to TrainTrack ~~~
-            Note that you can either append a floating point value or a 1d tensor
-            Throughout the code you should preserve your decision and append the same type
-            In conclusion either one of the following lines will work. Make sure to choose only one
-            Similarly if you calculate and want to plot the training accuracy you can plot it using
-                cumulate_train_acc(<accuracy>)
-            '''
-            TrainTrack.cumulate_train_loss(loss.item())
-            # TrainTrack.cumulate_train_loss(loss)
+    # Get the mean loss for this epoch and set a status message
+    train_loss = train_loss / len(train_loader)
+    status_msg = 'Train Epoch: {} \tLoss: {:.6f}'.format(epoch, train_loss)
+    # Send the user current status
+    TrainTrack.update_message(status_msg)
+    '''
+    ~~~ Add status results ~~~
+    With add_status() function you set add your end results as the current status of training progress
+    It's cumulative so many results can be appended to status
+    When needed status report can be cleared
+    '''
+    TrainTrack.add_status(status_msg)
+    '''
+    ~~~ Append train loss to TrainTrack ~~~
+    Note that you can either append a floating point value or a 1d tensor
+    Throughout the code you should preserve your decision and append the same type
+    Similarly if you calculate and want to plot the training accuracy you can plot it using
+        cumulate_train_acc(<accuracy>)
+    '''
+    TrainTrack.cumulate_train_loss(train_loss)
 
 
 # TrainTrack requires some modifications during test process
@@ -106,6 +127,13 @@ def test(args, model, device, test_loader):
     With update_message() function you can send your test results to the user
     '''
     TrainTrack.update_message(msg)
+    '''
+    ~~~ Add status results ~~~
+    With add_status() function you set add your end results as the current status of training progress
+    It's cumulative so many results can be appended to status
+    Note that status report can be cleared anytime
+    '''
+    TrainTrack.add_status(msg)
     '''
     ~~~ Append test loss and accuracy to TrainTrack ~~~
     Note that you can either append a floating point value or a 1d tensor
@@ -170,7 +198,10 @@ def main():
     model = Net().to(device)
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
 
-    for epoch in range(1, args.epochs + 1):
+    for epoch in range(1, args.epochs + 1001):
+        '''
+        Following lines are required by TrainTrack to function properly
+        '''
         # Update the epoch variable in TrainTrack in order to keep track of
         # the current epoch
         TrainTrack.update_epoch(epoch)
@@ -182,12 +213,27 @@ def main():
             for param_group in optimizer.param_groups:
                 param_group["lr"] = TrainTrack.lr
 
+        # Unmodified calls to methods
         train(args, model, device, train_loader, optimizer, epoch)
         test(args, model, device, test_loader)
 
+        '''
+        ~~~ Clear status report ~~~
+        Clear status report after every epoch for convenience
+        If wanted it can be cleared every n'th epoch or not cleared at all
+            For example here the status report is cleared every 3rd epoch
+        Note that it's cumulative
+        '''
+        if epoch % 3 == 0:
+            TrainTrack.clr_status()
+
+    # Unmodified model save
     if args.save_model:
         torch.save(model.state_dict(), "mnist_cnn.pt")
 
+    '''
+    Following lines are required by TrainTrack to function properly
+    '''
     # Exit conditions handling for TrainTrack
     # Notifies the user whether the training has terminated or finished after completing all epochs
     if TrainTrack.stop_train_flag:

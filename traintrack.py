@@ -1,23 +1,27 @@
 from telegram import (ReplyKeyboardMarkup, ReplyKeyboardRemove, Update)
-from telegram.ext import (Updater, CommandHandler, Filters, ConversationHandler, MessageHandler, CallbackContext)
+from telegram.ext import (Updater, CommandHandler, Filters, ConversationHandler,
+                          MessageHandler, CallbackContext)
 
 import logging
 from io import BytesIO
 
 try:
     import matplotlib
-    matplotlib.use('Agg')     # Use Agg backend because the QObject is created outside main func
+
+    matplotlib.use('Agg')  # Use Agg backend because the QObject is created outside main func
     from matplotlib import pyplot as plt
 except ImportError:
     plt = None
 
 
 class TrainTrack(object):
-    """  A class for interacting with a Telegram bot to monitor and control a PyTorch training process.
+    """  A class for interacting with a Telegram bot to monitor and control a
+         PyTorch training process.
     # Arguments
         token: String, a telegram bot token
         user_id: Integer. Specifying a telegram user id will filter all incoming
-                 commands to allow access only to a specific user. Optional, though highly recommended.
+                 commands to allow access only to a specific user. Optional,
+                 though highly recommended.
     """
 
     def __init__(self, token, user_id=None):
@@ -181,6 +185,7 @@ class TrainTrack(object):
         update.message.reply_text(self._status_message)
 
         # Toggling pre-report updates
+
     def toggle_prereport(self, update, context):
         """ Telegram bot callback for the /toggle_prereport command. Displays verification message with buttons"""
         reply_keyboard = [['On', 'Off']]

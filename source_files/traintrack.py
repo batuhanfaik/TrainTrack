@@ -340,7 +340,7 @@ class TrainTrack(object):
 
         # Plot the data if enough epochs has passed (min_epoch can be adjusted as desired)
         # This prevents retrieving an empty plot
-        min_epoch = 1
+        min_epoch = 2
         if self.n_epoch > min_epoch:
             axes[0].plot(self.train_loss, 'r--')
             axes[0].plot(self.test_loss, 'b-')

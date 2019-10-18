@@ -39,7 +39,7 @@ DIR = "/home/batuhanfaik/TrainTrack/imagenet_dataset/"
 categories = os.listdir(DIR)
 num_classes = len(categories)
 
-BATCH_SIZE = 16
+BATCH_SIZE = 13
 train_loader = torch.utils.data.DataLoader(TrainDataReaderWithHSL("train", directory=DIR, categories=categories),
                                            batch_size=BATCH_SIZE, shuffle=True, num_workers=64)
 test_loader = torch.utils.data.DataLoader(TestDataReaderWithHSL("test", directory=DIR, categories=categories),
@@ -49,8 +49,8 @@ test_loader = torch.utils.data.DataLoader(TestDataReaderWithHSL("test", director
 model = EfficientNet.from_pretrained('efficientnet-b7')
 
 # Freeze model parameters
-for param in model.parameters():
-    param.requires_grad = False
+# for param in model.parameters():
+#     param.requires_grad = False
 
 # Add fully connected classifier
 classifier = nn.Sequential(OrderedDict([
@@ -70,7 +70,7 @@ optimizer = torch.optim.SGD(model.parameters(), lr=0.001, momentum=0.9, weight_d
 model.cuda()
 loss = torch.nn.CrossEntropyLoss()
 
-num_epochs = 100
+num_epochs = 1000
 
 train_loss = []
 test_loss = []

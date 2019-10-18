@@ -2,12 +2,13 @@ from telegram import (ReplyKeyboardMarkup, ReplyKeyboardRemove)
 from telegram.ext import (Updater, CommandHandler, Filters, RegexHandler,
                           ConversationHandler)
 
-import numpy as np
 import logging
 from io import BytesIO
 
 try:
-    import matplotlib.pyplot as plt
+    import matplotlib
+    matplotlib.use('TkAgg')     # Use Tk backend because the lib is called outside main func
+    from matplotlib import pyplot as plt
 except ImportError:
     plt = None
 

@@ -9,6 +9,7 @@ import os, datetime, shutil
 
 # TrainTrack Bot imports
 from traintrack import TrainTrack
+
 telegram_token = "934547307:AAEb1Pqhk2iXvPrs1pLfHCrZTPehSx0dIkU"  # bot's token
 # user id is optional, however highly recommended as it limits the access to you alone.
 telegram_user_id = 734383954  # telegram user id (integer):
@@ -34,19 +35,18 @@ if clear_results:
 
 # Specify which GPUs to be used
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-DIR = "/home/batuhanfaik/DLEpochBot/imagenet_dataset/"
+DIR = "/home/batuhanfaik/TrainTrack/imagenet_dataset/"
+categories = os.listdir(DIR)
+num_classes = len(categories)
 
-num_classes = 6
+BATCH_SIZE = 16
+train_loader = torch.utils.data.DataLoader(TrainDataReaderWithHSL("train", directory=DIR, categories=categories),
+                                           batch_size=BATCH_SIZE, shuffle=True, num_workers=64)
+test_loader = torch.utils.data.DataLoader(TestDataReaderWithHSL("test", directory=DIR, categories=categories),
+                                          batch_size=BATCH_SIZE, shuffle=True, num_workers=64)
 
 # model = torch.load("/home/batuhanfaik/DLEpochBot/source_files/model_saves/Model_85.pt")
 model = EfficientNet.from_pretrained('efficientnet-b7')
-
-BATCH_SIZE = 16
-
-train_loader = torch.utils.data.DataLoader(TrainDataReaderWithHSL("train", directory=DIR), batch_size=BATCH_SIZE,
-                                           shuffle=True, num_workers=64)
-test_loader = torch.utils.data.DataLoader(TestDataReaderWithHSL("test", directory=DIR), batch_size=BATCH_SIZE,
-                                          shuffle=True, num_workers=64)
 
 # Freeze model parameters
 for param in model.parameters():
@@ -79,7 +79,7 @@ total_train_acc = np.empty((num_epochs, 1))
 total_test_loss = np.empty((num_epochs, 1))
 total_test_acc = np.empty((num_epochs, 1))
 
-for epoch_id in range(1, num_epochs+1):
+for epoch_id in range(1, num_epochs + 1):
     # Bot implementation
     bot.update_epoch(epoch_id)
     if bot.stop_train_flag:
@@ -142,8 +142,8 @@ for epoch_id in range(1, num_epochs+1):
     # Bot implementation
     bot.update_message(message1)
 
-    total_train_loss[epoch_id-1] = current_train_loss
-    total_train_acc[epoch_id-1] = current_train_acc
+    total_train_loss[epoch_id - 1] = current_train_loss
+    total_train_acc[epoch_id - 1] = current_train_acc
 
     with torch.no_grad():
         model.eval()
@@ -171,10 +171,10 @@ for epoch_id in range(1, num_epochs+1):
     current_test_acc = total_true.item() * 1.0 / (total_true.item() + total_false.item())
 
     message2 = "~~Validation {0} Report~~\n" \
-                   "Loss: {1:.6f}\n" \
-                   "Accuracy: {2:.4f}%\n" \
-                   "Time (s): {3:.4f}\n".format(epoch_id, total_loss / len(test_loader), current_test_acc * 100,
-                                                time.time() - time_start)
+               "Loss: {1:.6f}\n" \
+               "Accuracy: {2:.4f}%\n" \
+               "Time (s): {3:.4f}\n".format(epoch_id, total_loss / len(test_loader), current_test_acc * 100,
+                                            time.time() - time_start)
 
     print(message2)
     # Bot implementation
@@ -190,8 +190,8 @@ for epoch_id in range(1, num_epochs+1):
         model.cuda()
 
     current_test_loss = total_loss.cpu() / len(test_loader)
-    total_test_loss[epoch_id-1] = current_test_loss
-    total_test_acc[epoch_id-1] = current_test_acc
+    total_test_loss[epoch_id - 1] = current_test_loss
+    total_test_acc[epoch_id - 1] = current_test_acc
 
     if add_up and os.listdir("./results/"):
         try:
@@ -214,7 +214,7 @@ for epoch_id in range(1, num_epochs+1):
         np.save("./results/TR_Acc.npy", total_train_acc)
         np.save("./results/TS_Acc.npy", total_test_acc)
 
-# Bot implementation
+    # Bot implementation
     bot.cumulate_train_loss(current_train_loss)
     bot.cumulate_test_loss(current_test_loss)
     bot.cumulate_train_acc(current_train_acc)

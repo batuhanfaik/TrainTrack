@@ -211,7 +211,7 @@ def main():
         if TrainTrack.stop_train_flag:
             break
         # Manually control learning rate using TrainTrack
-        if TrainTrack.lr is not None:
+        if TrainTrack.learning_rate is not None:
             for param_group in optimizer.param_groups:
                 param_group["lr"] = TrainTrack.learning_rate
 

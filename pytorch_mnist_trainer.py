@@ -198,7 +198,7 @@ def main():
     model = Net().to(device)
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
 
-    for epoch in range(1, args.epochs + 1001):
+    for epoch in range(1, args.epochs + 1):
         '''
         Following lines are required by TrainTrack to function properly
         '''

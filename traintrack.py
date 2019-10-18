@@ -1,9 +1,8 @@
+import logging
+from io import BytesIO
 from telegram import (ReplyKeyboardMarkup, ReplyKeyboardRemove, Update)
 from telegram.ext import (Updater, CommandHandler, Filters, ConversationHandler,
                           MessageHandler, CallbackContext)
-
-import logging
-from io import BytesIO
 
 try:
     import matplotlib
@@ -14,7 +13,7 @@ except ImportError:
     plt = None
 
 
-class TrainTrack(object):
+class TrainTrack:
     """  A class for interacting with a Telegram bot to monitor and control a
          PyTorch training process.
     # Arguments
@@ -35,7 +34,7 @@ class TrainTrack(object):
         self.bot_active = False  # currently not in use
         self.name = "TrainTrack"
         self._status_message = "No status report has been sent yet!"  # placeholder status message
-        self.lr = None
+        self.learning_rate = None
         self.modify_lr = 1.0  # Initial lr multiplier
         self.verbose = True  # Automatic per epoch updates
         self.n_epoch = 0  # Number of epochs
@@ -51,7 +50,8 @@ class TrainTrack(object):
         self.train_acc = []
         self.test_acc = []
         # Enable logging
-        logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+        logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                            level=logging.INFO)
         self.logger = logging.getLogger(__name__)
         # Message to display on /start and /help commands
         self.startup_message = "Hello, this is TrainTrack! I will keep you updated on your training process.\n" \
@@ -70,26 +70,33 @@ class TrainTrack(object):
     def activate_bot(self):
         """ Function to initiate the Telegram bot """
         self.updater = Updater(self.token, use_context=True)  # setup updater
-        dp = self.updater.dispatcher  # Get the dispatcher to register handlers
-        dp.add_error_handler(self.error)  # log all errors
+        dispatcher = self.updater.dispatcher  # Get the dispatcher to register handlers
+        dispatcher.add_error_handler(self.error)  # log all errors
         print("TrainTrack has been initiated.\n"
               "Don\'t forget to start it on Telegram!\n")
 
         self.filters = Filters.user(user_id=self.user_id) if self.user_id else None
         # Command and conversation handles
-        dp.add_handler(CommandHandler("start", self.start, filters=self.filters))  # /start
-        dp.add_handler(CommandHandler("help", self.help, filters=self.filters))  # /help
-        dp.add_handler(CommandHandler("getlr", self.get_lr, filters=self.filters))  # /get learning rate
-        dp.add_handler(CommandHandler("dislr", self.disable_lr, filters=self.filters))  # /disable learning rate control
-        dp.add_handler(CommandHandler("quiet", self.quiet, filters=self.filters))  # /stop automatic updates
-        dp.add_handler(CommandHandler("status", self.status, filters=self.filters))  # /get status
-        dp.add_handler(CommandHandler("plot", self.plot_loss, filters=self.filters))  # /plot loss
-        dp.add_handler(CommandHandler("set_period", self.set_period, pass_args=True,
-                                      filters=self.filters))  # /set frequency
-        dp.add_handler(self.prereport_handler())  # toggle on/off pre-report updates
-        dp.add_handler(self.lr_handler())  # set learning rate
-        dp.add_handler(self.stop_handler())  # stop training
-        dp.add_handler(MessageHandler(Filters.command, self.unknown))  # unknown command handler
+        dispatcher.add_handler(CommandHandler("start", self.start, filters=self.filters))  # /start
+        dispatcher.add_handler(CommandHandler("help", self.help, filters=self.filters))  # /help
+        dispatcher.add_handler(
+            CommandHandler("getlr", self.get_lr, filters=self.filters))  # /get learning rate
+        dispatcher.add_handler(CommandHandler("dislr",  # /disable learning rate control
+                                              self.disable_lr, filters=self.filters))
+        dispatcher.add_handler(
+            CommandHandler("quiet", self.quiet, filters=self.filters))  # /stop automatic updates
+        dispatcher.add_handler(
+            CommandHandler("status", self.status, filters=self.filters))  # /get status
+        dispatcher.add_handler(
+            CommandHandler("plot", self.plot_loss, filters=self.filters))  # /plot loss
+        dispatcher.add_handler(CommandHandler("set_period", self.set_period, pass_args=True,
+                                              filters=self.filters))  # /set frequency
+        dispatcher.add_handler(self.prereport_handler())  # toggle on/off pre-report updates
+        dispatcher.add_handler(self.lr_handler())  # set learning rate
+        dispatcher.add_handler(self.stop_handler())  # stop training
+
+        dispatcher.add_handler(
+            MessageHandler(Filters.command, self.unknown))  # unknown command handler
 
         # Start the Bot
         self.updater.start_polling()
@@ -125,7 +132,8 @@ class TrainTrack(object):
         """Log Errors caused by Updates."""
         self.logger.warning('Update "%s" caused error "%s"', update, context.error)
 
-    def unknown(self, update, context):
+    @classmethod
+    def unknown(cls, update, context):
         update.message.reply_text("Sorry! I didn't understand that command.")
 
     def send_message(self, txt):
@@ -147,24 +155,29 @@ class TrainTrack(object):
 
     # Method for clearing status list
     def clr_status(self):
+        """Clears the status list"""
         self.status_list.clear()
 
-    def update_epoch(self, n):
-        assert isinstance(n, int), 'Number of epochs must be of type integer'
-        self.n_epoch = n
+    def update_epoch(self, n_epoch):
+        """Current epoch index. Updated every epoch by trainer"""
+        assert isinstance(n_epoch, int), 'Number of epochs must be of type integer'
+        self.n_epoch = n_epoch
 
     def update_message(self, msg):
+        """Sends the user current training messages if bot active"""
         assert isinstance(msg, str), 'Status Message must be of type string'
         if self.verbose:
             if self.n_epoch % self.update_period == 0:
                 self.send_message(msg)
 
     def update_prereport(self, msg):
+        """Sends pre-report messages to the user if toggled on (Default: on)"""
         assert isinstance(msg, str), 'Status Message must be of type string'
         if self.prereport:
             self.update_message(msg)
 
     def set_period(self, update, context):
+        """Sets the period of update messages"""
         self.chat_id = update.message.chat_id
         try:
             n_to_set = int(context.args[0])
@@ -174,7 +187,8 @@ class TrainTrack(object):
                 return
 
             self.update_period = n_to_set
-            update.message.reply_text("OK, updates will be sent every {} epoch(s).".format(self.update_period))
+            update.message.reply_text(
+                "OK, updates will be sent every {} epoch(s).".format(self.update_period))
         except (IndexError, ValueError):
             update.message.reply_text("Usage: /set_period <positive integer>")
 
@@ -184,10 +198,11 @@ class TrainTrack(object):
             self._status_message = self._status_message + "\n" + state
         update.message.reply_text(self._status_message)
 
-        # Toggling pre-report updates
-
-    def toggle_prereport(self, update, context):
-        """ Telegram bot callback for the /toggle_prereport command. Displays verification message with buttons"""
+    # Toggling pre-report updates
+    @classmethod
+    def toggle_prereport(cls, update, context):
+        """ Telegram bot callback for the /toggle_prereport command. Displays verification
+            message with buttons"""
         reply_keyboard = [['On', 'Off']]
         update.message.reply_text(
             "Toggle pre-report updates\n",
@@ -195,19 +210,23 @@ class TrainTrack(object):
         return 1
 
     def toggle_prereport_verify(self, update, context):
-        """ Telegram bot callback for the /toggle_prereport command. Handle user selection as part of conversation"""
+        """ Telegram bot callback for the /toggle_prereport command. Handle user selection
+            as part of conversation"""
         is_sure = update.message.text  # Get response
         if is_sure == 'On':
             self.prereport = True
-            update.message.reply_text('OK, turning on pre-report updates.', reply_markup=ReplyKeyboardRemove())
+            update.message.reply_text('OK, turning on pre-report updates.',
+                                      reply_markup=ReplyKeyboardRemove())
         elif is_sure == 'Off':
             self.prereport = False  # to allow changing your mind before stop took place
-            update.message.reply_text('OK, turning off pre-report updates.', reply_markup=ReplyKeyboardRemove())
+            update.message.reply_text('OK, turning off pre-report updates.',
+                                      reply_markup=ReplyKeyboardRemove())
 
         return ConversationHandler.END
 
     def cancel_prereport(self, update, context):
-        """ Telegram bot callback for the /toggle_prereport command. Handle user cancellation as part of conversation"""
+        """ Telegram bot callback for the /toggle_prereport command. Handle user cancellation
+            as part of conversation"""
         if self.prereport:
             update.message.reply_text('User cancelled, pre-report updates are still on.',
                                       reply_markup=ReplyKeyboardRemove())
@@ -217,9 +236,11 @@ class TrainTrack(object):
         return ConversationHandler.END
 
     def prereport_handler(self):
-        """ Function to setup the callbacks for the /toggle_prereport command. Returns a conversation handler """
+        """ Function to setup the callbacks for the /toggle_prereport command.
+            Returns a conversation handler """
         conv_handler = ConversationHandler(
-            entry_points=[CommandHandler('toggle_prereport', self.toggle_prereport, filters=self.filters)],
+            entry_points=[
+                CommandHandler('toggle_prereport', self.toggle_prereport, filters=self.filters)],
             states={1: [MessageHandler(Filters.regex('^(On|Off)$'), self.toggle_prereport_verify)]},
             fallbacks=[CommandHandler('cancel', self.cancel_prereport, filters=self.filters)])
         return conv_handler
@@ -227,18 +248,20 @@ class TrainTrack(object):
     # Setting Learning Rate Callbacks:
     def get_lr(self, update, context):
         """ Telegram bot callback for the /getlr command. Replies with current learning rate"""
-        if self.lr:
-            update.message.reply_text("Current learning rate: " + str(self.lr))
+        if self.learning_rate:
+            update.message.reply_text("Current learning rate: " + str(self.learning_rate))
         else:
             update.message.reply_text("Learning rate is not controlled by TrainTrack.\n"
                                       "To pass a learning rate, use the /setlr command.")
 
     def set_lr_front(self, update, context):
-        """ Telegram bot callback for the /setlr command. Displays option buttons for learning rate multipliers"""
-        if self.lr is None:
-            self.lr = 1
+        """ Telegram bot callback for the /setlr command. Displays option buttons for
+            learning rate multipliers"""
+        if self.learning_rate is None:
+            self.learning_rate = 1
             update.message.reply_text(
-                'Learning rate is now under TrainTrack\'s control and is set to {}.'.format(self.lr))
+                'Learning rate is now under TrainTrack\'s control and is set to {}.'.format(
+                    self.learning_rate))
         reply_keyboard = [['X0.1', 'X0.5', 'X0.67', 'X1.5', 'X2', 'X10']]  # possible multipliers
         # Show message with option buttons
         update.message.reply_text(
@@ -248,19 +271,23 @@ class TrainTrack(object):
         return 1
 
     def set_lr_back(self, update, context):
-        """ Telegram bot callback for the /setlr command. Handle user selection as part of conversation"""
-        options = {'X0.1': 0.1, 'X0.5': 0.5, 'X0.67': 0.67, 'X1.5': 1.5, 'X2': 2.0, 'X10': 10.0}  # possible multipliers
+        """ Telegram bot callback for the /setlr command. Handle user selection as part
+            of conversation"""
+        options = {'X0.1': 0.1, 'X0.5': 0.5, 'X0.67': 0.67, 'X1.5': 1.5, 'X2': 2.0,
+                   'X10': 10.0}  # possible multipliers
         self.modify_lr = options[update.message.text]  # User selection
-        if self.lr is not None:
-            self.lr *= self.modify_lr
-            update.message.reply_text(" Learning rate will be multiplied by {0} on the beginning of next epoch!\n"
-                                      "(New LR = {1:.4e})".format(str(self.modify_lr), self.lr * self.modify_lr),
-                                      reply_markup=ReplyKeyboardRemove())
+        if self.learning_rate is not None:
+            self.learning_rate *= self.modify_lr
+            update.message.reply_text(
+                " Learning rate will be multiplied by {0} on the beginning of next epoch!\n"
+                "(New LR = {1:.4e})".format(str(self.modify_lr), self.learning_rate * self.modify_lr),
+                reply_markup=ReplyKeyboardRemove())
 
         return ConversationHandler.END
 
     def cancel_lr(self, update, context):
-        """ Telegram bot callback for the /setlr command. Handle user cancellation as part of conversation"""
+        """ Telegram bot callback for the /setlr command. Handle user cancellation as
+            part of conversation"""
         self.modify_lr = 1.0
         update.message.reply_text('OK, learning rate will not be modified on next epoch.',
                                   reply_markup=ReplyKeyboardRemove())
@@ -268,25 +295,30 @@ class TrainTrack(object):
         return ConversationHandler.END
 
     def lr_handler(self):
-        """ Function to setup the callbacks for the /setlr command. Returns a conversation handler """
+        """ Function to setup the callbacks for the /setlr command.
+            Returns a conversation handler """
         conv_handler = ConversationHandler(
             entry_points=[CommandHandler('setlr', self.set_lr_front, filters=self.filters)],
-            states={1: [MessageHandler(Filters.regex('^(X0.5|X0.1|X0.67|X1.5|X2|X10)$'), self.set_lr_back)]},
+            states={1: [MessageHandler(Filters.regex('^(X0.5|X0.1|X0.67|X1.5|X2|X10)$'),
+                                       self.set_lr_back)]},
             fallbacks=[CommandHandler('cancel', self.cancel_lr, filters=self.filters)])
 
         return conv_handler
 
     def disable_lr(self, update, context):
-        """ Telegram bot callback for the /dislr command. Stops TrainTrack from controlling the learning rate"""
-        if self.lr is not None:
+        """ Telegram bot callback for the /dislr command. Stops TrainTrack from
+            controlling the learning rate"""
+        if self.learning_rate is not None:
             update.message.reply_text("TrainTrack no longer controls the learning rate!")
-            self.lr = None
+            self.learning_rate = None
         else:
             update.message.reply_text("TrainTrack doesn't control the learning rate!")
 
     # Stop training process callbacks
-    def stop_training(self, update, context):
-        """ Telegram bot callback for the /stoptraining command. Displays verification message with buttons"""
+    @classmethod
+    def stop_training(cls, update, context):
+        """ Telegram bot callback for the /stop_training command. Displays
+            verification message with buttons"""
         reply_keyboard = [['Yes', 'No']]
         update.message.reply_text(
             'Are you absolutely sure?\n'
@@ -295,50 +327,60 @@ class TrainTrack(object):
         return 1
 
     def stop_training_verify(self, update, context):
-        """ Telegram bot callback for the /stoptraining command. Handle user selection as part of conversation"""
+        """ Telegram bot callback for the /stoptraining command. Handle user
+            selection as part of conversation"""
         is_sure = update.message.text  # Get response
         if is_sure == 'Yes':
             self.stop_train_flag = True
             update.message.reply_text('OK, stopping training after this epoch!\n'
                                       'Note that you can still cancel your request by sending '
-                                      '/stop_training and replying \"No\".', reply_markup=ReplyKeyboardRemove())
+                                      '/stop_training and replying \"No\".',
+                                      reply_markup=ReplyKeyboardRemove())
         elif is_sure == 'No':
             self.stop_train_flag = False  # to allow changing your mind before stop took place
-            update.message.reply_text('OK, canceling stop request!', reply_markup=ReplyKeyboardRemove())
+            update.message.reply_text('OK, canceling stop request!',
+                                      reply_markup=ReplyKeyboardRemove())
 
         return ConversationHandler.END
 
     def cancel_stop(self, update, context):
-        """ Telegram bot callback for the /stoptraining command. Handle user cancellation as part of conversation"""
+        """ Telegram bot callback for the /stoptraining command. Handle user
+            cancellation as part of conversation"""
         self.stop_train_flag = False
         update.message.reply_text('OK, training will not be stopped.',
                                   reply_markup=ReplyKeyboardRemove())
         return ConversationHandler.END
 
     def stop_handler(self):
-        """ Function to setup the callbacks for the /stoptraining command. Returns a conversation handler """
+        """ Function to setup the callbacks for the /stoptraining command.
+            Returns a conversation handler """
         conv_handler = ConversationHandler(
-            entry_points=[CommandHandler('stop_training', self.stop_training, filters=self.filters)],
+            entry_points=[
+                CommandHandler('stop_training', self.stop_training, filters=self.filters)],
             states={1: [MessageHandler(Filters.regex('^(Yes|No)$'), self.stop_training_verify)]},
             fallbacks=[CommandHandler('cancel', self.cancel_stop, filters=self.filters)])
         return conv_handler
 
     # Cumulative methods for train/test losses and accuracies
     def cumulate_train_loss(self, train_loss):
+        """Cumulate training losses"""
         self.train_loss.append(train_loss)
 
     def cumulate_test_loss(self, test_loss):
+        """Cumulate test losses"""
         self.test_loss.append(test_loss)
 
     def cumulate_train_acc(self, train_acc):
+        """Cumulate training accuracies"""
         self.train_acc.append(train_acc)
 
     def cumulate_test_acc(self, test_acc):
+        """Cumulate test accuracies"""
         self.test_acc.append(test_acc)
 
     # Plot accuracies and losses (cumulative)
     def plot_loss(self, update, context):
-        # Telegram bot callback for the /plot command. Replies with a convergence plot image
+        """Telegram bot callback for the /plot command. Replies with a convergence plot image"""
         if plt is None:
             # matplotlib isn't installed
             update.message.reply_text("Sorry, can't plot!\n"
@@ -349,8 +391,8 @@ class TrainTrack(object):
         fig, axes = plt.subplots(nrows=2, ncols=1, constrained_layout=True)
         axes[0].set_title("Losses")
         axes[1].set_title("Accuracies")
-        for ax in range(len(axes)):
-            axes[ax].set_xlabel("n of epoch")
+        for axis, _ in enumerate((axes)):
+            axes[axis].set_xlabel("n of epoch")
         axes[0].set_ylabel("loss")
         axes[1].set_ylabel("accuracy")
         fig.suptitle("TrainTrack Loss and Accuracy Plots")
@@ -373,4 +415,5 @@ class TrainTrack(object):
             update.message.reply_photo(buffer)  # Send the image to the user
         else:
             update.message.reply_text("Not enough epochs has iterated yet for a proper plot.\n"
-                                      "Plotting should be available after epoch {}.".format(min_epoch))
+                                      "Plotting should be available after epoch {}.".format(
+                min_epoch))

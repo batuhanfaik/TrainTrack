@@ -83,7 +83,8 @@ def train(args, model, device, train_loader, optimizer, epoch):
     TrainTrack.update_message(status_msg)
     '''
     ~~~ Add status results ~~~
-    With add_status() function you set add your end results as the current status of training progress
+    With add_status() function you set add your end results as the current status of training
+        progress
     It's cumulative so many results can be appended to status
     When needed status report can be cleared
     '''
@@ -129,7 +130,8 @@ def test(args, model, device, test_loader):
     TrainTrack.update_message(msg)
     '''
     ~~~ Add status results ~~~
-    With add_status() function you set add your end results as the current status of training progress
+    With add_status() function you set add your end results as the current status of training
+        progress
     It's cumulative so many results can be appended to status
     Note that status report can be cleared anytime
     '''
@@ -211,7 +213,7 @@ def main():
         # Manually control learning rate using TrainTrack
         if TrainTrack.lr is not None:
             for param_group in optimizer.param_groups:
-                param_group["lr"] = TrainTrack.lr
+                param_group["lr"] = TrainTrack.learning_rate
 
         # Unmodified calls to methods
         train(args, model, device, train_loader, optimizer, epoch)

@@ -1,2 +1,6 @@
 python-telegram-bot
 matplotlib
+# If you want to run pytorch_mnist_trainer.py
+# Following packages are required
+torch
+torchvision

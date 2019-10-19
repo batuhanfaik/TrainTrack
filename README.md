@@ -1,3 +1,5 @@
+<!-- INTRO -->
+
 <h1 align="center">TrainTrack</h1>
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack">
@@ -39,11 +41,11 @@
 
 -   [About the Project](#about-the-project)
     -   [Features](#features)
-    -   [Built With](#built-with)
+    -   [Built with](#built-with)
 -   [Getting Started](#getting-started)
     -   [Prerequisites](#prerequisites)
     -   [Installation](#installation)
-    -   [implementation](#implementation)
+    -   [Implementation](#implementation)
 -   [Usage](#usage)
 -   [Roadmap](#roadmap)
 -   [Contributing](#contributing)
@@ -53,7 +55,7 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
+## About the Project
 
 [TrainTrack](https://github.com/batuhanfaik/TrainTrack/) is a [Telegram](https://telegram.org/) bot that helps you track, visualize and control your neural network training process on various platforms using [Telegram Bot
 API](https://github.com/python-telegram-bot/python-telegram-bot). It is developed for [PyTorch](https://pytorch.org/) framework.
@@ -64,7 +66,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack">
-    <img src="/img/screenshot.png" alt="TrainTrack Screenshot" height="480" />
+    <img src="/img/screenshot.png" alt="TrainTrack Screenshot" height="200" />
   </a>
 </p>
 
@@ -79,6 +81,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
   </a>
 </p>
 </details>
+
 -   Control the learning rate
 <details><summary><b>Show learning rate commands</b></summary>
 <br/>
@@ -88,6 +91,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
   </a>
 </p>
 </details>
+
 -   Query the latest metrics
 <details><summary><b>Show status command</b></summary>
 <br/>
@@ -97,6 +101,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
   </a>
 </p>
 </details>
+
 -   Get loss, accuracy convergence plots
 <details><summary><b>Show plot command</b></summary>
 <br/>
@@ -106,6 +111,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
   </a>
 </p>
 </details>
+
 -   Stop the training process
 <details><summary><b>Show stop command</b></summary>
 <br/>
@@ -117,9 +123,10 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 </details>
 -   Limit access to a specific Telegram user ID
 
-### Built With
+### Built with
 
 -   [Python](https://www.python.org/)
+<a href="https://www.python.org/"><img src="https://img.shields.io/github/pipenv/locked/python-version/batuhanfaik/TrainTrack" alt="Python" /></a>
 
 <!-- GETTING STARTED -->
 
@@ -142,3 +149,138 @@ pip install python-telegram-bot
 pip install matplotlib
 pip install torch torchvision
 ```
+
+### Installation
+
+1. Make sure you have installed required prerequisites
+
+2. Clone this repository
+
+```sh
+git clone https:://github.com/batuhanfaik/TrainTrack.git
+```
+
+3. Copy `traintrack.py` to your trainer destination
+
+```sh
+cd TrainTrack/
+cp traintrack.py /<your>/<training_dir>/
+```
+
+4. Create a free Telegram bot using the Telegram app. Just follow [these](https://core.telegram.org/bots#6-botfather) instructions provided in the official Telegram bot documentation.
+
+5. Take a note of the given token. It will be used later in the [Implementation](#implementation) section.
+  * Optional: You can follow [this](https://bigone.zendesk.com/hc/en-us/articles/360008014894-How-to-get-the-Telegram-user-ID-) article to learn your Telegram user ID. Your user ID can be used to limit the
+  access of TrainTrack only to yourself
+
+### Implementation
+
+-  Import bot in your trainer source file
+
+<details><summary><b>Show code</b></summary>
+
+Following piece of code is all you need to import TrainTrack into your project
+
+```python
+# Import TrainTrack Bot
+from traintrack import TrainTrack
+
+telegram_token = "TOKEN"  # TrainTrack's token
+# User id is optional and can be kept as None.
+# However highly recommended as it limits the access to you alone.
+telegram_user_id = None  # Telegram user id (integer):
+# Create a TrainTrack Bot instance
+TrainTrack = TrainTrack(token=telegram_token, user_id=telegram_user_id)
+# Activate the bot
+TrainTrack.activate_bot()
+```
+
+</details>
+
+-   Add TrainTrack's `update_epoch()` method, `/stop` and learning rate controlling
+commands in the training loop
+
+<details><summary><b>Show code</b></summary>
+
+Following piece of code is needed to be placed in your training loop
+
+```python
+# Update the epoch variable in TrainTrack in order to keep track of
+# the current epoch
+TrainTrack.update_epoch(epoch)
+# Force break epoch loop when the user stops training
+if TrainTrack.stop_train_flag:
+    break
+# Manually control learning rate using TrainTrack
+if TrainTrack.learning_rate is not None:
+    for param_group in optimizer.param_groups:
+        param_group["lr"] = TrainTrack.learning_rate
+```
+
+-   Using TrainTrack's `update_prereport()`, `update_message()`, `add_status()`, `clr_status()` methods, you can control the messages that will be sent out by TrainTrack
+
+-   Using TrainTrack's `cumulate_<train/test>_<loss/acc>()` methods, you can cumulate your losses and
+accuracies for the plot
+
+-   Add TrainTrack's `stop_bot()` method and exit condition handlers after the training
+loop
+
+<details><summary><b>Show code</b></summary>
+
+Following piece of code is needed to be placed after your training loop
+
+```python
+# Exit conditions handling for TrainTrack
+# Notifies the user whether the training has terminated or finished after completing all epochs
+if TrainTrack.stop_train_flag:
+    print("Training stopped by {}!".format(TrainTrack.name))
+    TrainTrack.send_message("Training stopped by {}!".format(TrainTrack.name))
+else:
+    print("Training complete. {} out!".format(TrainTrack.name))
+    TrainTrack.send_message("Training complete. {} out!".format(TrainTrack.name))
+# Stop TrainTrack Bot instance at the end of training
+TrainTrack.stop_bot()
+```
+
+<!-- USAGE EXAMPLES -->
+
+## Usage
+
+Each command is shown in the [Features](#features) section. Please refer to it since there is no documentation available for this project yet.
+
+<!-- ROADMAP -->
+
+## Roadmap
+
+See the [open issues](https://github.com/github_username/repo/issues) for a list of proposed features (and known issues).
+
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**. PR's are always welcome!
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/new_feature`)
+3.  Commit your Changes (`git commit -m 'Added this new_feature'`)
+4.  Push to the Branch (`git push origin feature/new_feature`)
+5.  Open a Pull Request
+
+<!-- LICENSE -->
+
+## Licenses
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+<!-- CONTACT -->
+
+## Contact
+
+<h3 align="center">Batuhan Faik Derinbay<h3>
+<p align="center">
+  <a href="https://www.linkedin.com/in/batuhanderinbay/">LinkedIn</a>
+  -
+  <a href="mailto:batuhan@derinbay.com">Email</a>
+  -
+  <a href="https://github.com/batuhanfaik/traintrack">This Project</a>
+</p>

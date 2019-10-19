@@ -57,12 +57,11 @@
 
 ## About the Project
 
-[TrainTrack](https://github.com/batuhanfaik/TrainTrack/) is a [Telegram](https://telegram.org/) bot that helps you track, visualize and control your neural network training process on various platforms using [Telegram Bot
-API](https://github.com/python-telegram-bot/python-telegram-bot). It is developed for [PyTorch](https://pytorch.org/) framework.
+[TrainTrack](https://github.com/batuhanfaik/TrainTrack/) is a [Telegram](https://telegram.org/) bot that helps you track, visualize and control your neural network training process on various platforms using [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) wrapper for Telegram Bot API. TrainTrack is developed for [PyTorch](https://pytorch.org/) framework but can be used with TensorFlow and Keras as well.
 
 Origin of the bot and it's implementation on TenserFlow, Keras can be found on [@eyalzk](https://eyalzk.github.io/)'s [GitHub repo](https://github.com/eyalzk/telegrad).
 
-An example implementation of the bot on [PyTorch MNIST example](https://github.com/pytorch/examples/tree/master/mnist) can be found in the source files. Read the source code thoroughly for better understanding its implementation on your neural network trainer. The code is well commented and points out each line of code you should implement in order for TrainTrack to function properly.
+An example implementation of the bot on [PyTorch MNIST example](https://github.com/pytorch/examples/tree/master/mnist) is in the source files under the filename `pytorch_mnist_example.py`. Read the source code thoroughly for better understanding its implementation on your neural network trainer. The example is well commented and points out each line of code you should implement in order for TrainTrack to function properly.
 
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack">
@@ -167,6 +166,7 @@ cp traintrack.py /<your>/<training_dir>/<source_files>/
 4. Create a free Telegram bot using the Telegram app. Just follow [these](https://core.telegram.org/bots#6-botfather) instructions provided in the official Telegram bot documentation.
 
 5. Take a note of the given token. It will be used later in the [Implementation](#implementation) section.
+
   * Optional: You can follow [this](https://bigone.zendesk.com/hc/en-us/articles/360008014894-How-to-get-the-Telegram-user-ID-) article to learn your Telegram user ID. Your user ID can be used to limit the
   access of TrainTrack only to yourself
 
@@ -282,8 +282,15 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <h3 align="center">Batuhan Faik Derinbay</h3>
 <p align="center">
   <a href="https://www.linkedin.com/in/batuhanderinbay/">LinkedIn</a>
-  -
+   |
   <a href="mailto:batuhan@derinbay.com">Email</a>
-  -
+   |
   <a href="https://github.com/batuhanfaik/traintrack">This Project</a>
 </p>
+
+<!-- ACKNOWLEDGEMENTS -->
+
+## Acknowledgements
+
+-   [telegrad](https://github.com/eyalzk/telegrad)
+-   [python-telegram-bot]](https://github.com/python-telegram-bot/python-telegram-bot)

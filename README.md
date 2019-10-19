@@ -166,8 +166,7 @@ cp traintrack.py /<your>/<training_dir>/<source_files>/
 4. Create a free Telegram bot using the Telegram app. Just follow [these](https://core.telegram.org/bots#6-botfather) instructions provided in the official Telegram bot documentation.
 
 5. Take a note of the given token. It will be used later in the [Implementation](#implementation) section.
-
-  * Optional: You can follow [this](https://bigone.zendesk.com/hc/en-us/articles/360008014894-How-to-get-the-Telegram-user-ID-) article to learn your Telegram user ID. Your user ID can be used to limit the
+   * Optional: You can follow [this](https://bigone.zendesk.com/hc/en-us/articles/360008014894-How-to-get-the-Telegram-user-ID-) article to learn your Telegram user ID. Your user ID can be used to limit the
   access of TrainTrack only to yourself
 
 ### Implementation
@@ -293,4 +292,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Acknowledgements
 
 -   [telegrad](https://github.com/eyalzk/telegrad)
--   [python-telegram-bot]](https://github.com/python-telegram-bot/python-telegram-bot)
+-   [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)

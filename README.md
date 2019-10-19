@@ -1,9 +1,7 @@
-<h1 align="center">TrainTrack</h1>
-
 <a href="https://github.com/batuhanfaik/TrainTrack">
   <img src="/img/traintrack_logo.png" align="right" alt="Train Track" height="80" />
 </a>
-<br/>
+<h1 align="center">TrainTrack</h1>
 <div class="badges_quality">
   <p align="center">
     <a href="https://www.codefactor.io/repository/github/batuhanfaik/traintrack"><img src="https://www.codefactor.io/repository/github/batuhanfaik/traintrack/badge?s=f80b4d54be8cacf5cdd84ed3b022758feef5804c" alt="CodeFactor" /></a>

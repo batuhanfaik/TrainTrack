@@ -1,29 +1,25 @@
-<a href="https://github.com/batuhanfaik/TrainTrack/">
-<img src="/img/traintrack_logo.png" align="right" alt="Train Track" height="80"/></a>
-# TrainTrack
-[![CodeFactor](https://www.codefactor.io/repository/github/batuhanfaik/traintrack/badge?s=f80b4d54be8cacf5cdd84ed3b022758feef5804c)](https://www.codefactor.io/repository/github/batuhanfaik/traintrack)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/badges/quality-score.png?b=master&s=c04ea8230d0eceb057e7ce84cf663557fc4c23f5)](https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/badges/build.png?b=master&s=96213f9f503a3d89c233b2aa976b9c169dcf8f29)](https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/build-status/master)
-[![Code Intelligence Status](https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/badges/code-intelligence.svg?b=master&s=b0af3ba8b6ed4f0373456794e98ea534912645eb)](https://scrutinizer-ci.com/code-intelligence)
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+<a href="https://github.com/batuhanfaik/TrainTrack/"><img src="/img/traintrack_logo.png" align="right" alt="Train Track" height="80"/></a>
+TrainTrack
+==========
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[TrainTrack](https://github.com/batuhanfaik/TrainTrack/) is a [Telegram](https://telegram.org/) bot that helps you track, visualize and control your neural network training process on various platforms using [Telegram Bot API](https://github.com/python-telegram-bot/python-telegram-bot). It is developed for [PyTorch](https://pytorch.org/) framework.
+Origin of the bot and it's implementation on TenserFlow, Keras can be found on [@eyalzk](https://eyalzk.github.io/)'s [GitHub repo](https://github.com/eyalzk/telegrad).
+
+<div class="badges_quality">
+  <p align="center">
+    <a href="https://www.codefactor.io/repository/github/batuhanfaik/traintrack"><img src="https://www.codefactor.io/repository/github/batuhanfaik/traintrack/badge?s=f80b4d54be8cacf5cdd84ed3b022758feef5804c" alt="CodeFactor" /></a>
+    <a href="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/"><img src="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/badges/quality-score.png?b=master&s=c04ea8230d0eceb057e7ce84cf663557fc4c23f5" alt="Scrutinizer Code Quality" /></a>
+    <a href="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/build-status/master"><img src="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/badges/build.png?b=master&s=96213f9f503a3d89c233b2aa976b9c169dcf8f29" alt="Build Status" /></a>
+    <a href="https://scrutinizer-ci.com/code-intelligence"><img src="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/badges/code-intelligence.svg?b=master&s=b0af3ba8b6ed4f0373456794e98ea534912645eb" alt="Code Intelligence Status" /></a>
+  </p>
+ </div>
+ <div class="badges_repo">
+  <p align="center">
+    <a href="https://github.com/batuhanfaik/TrainTrack/graphs/contributors"><img src="https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square" alt="Contributors" /></a>
+    <a href="https://github.com/batuhanfaik/TrainTrack/network/members"><img src="https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square" alt="Forks" /></a>
+    <a href="https://github.com/batuhanfaik/TrainTrack/stargazers"><img src="https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square" alt="Stargazers" /></a>
+    <a href="https://github.com/batuhanfaik/TrainTrack/issues"><img src="https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square" alt="Issues" /></a>
+    <a href="https://github.com/batuhanfaik/TrainTrack/blob/master/LICENSE"><img src="https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square" alt="MIT License" /></a>
+    <a href="https://linkedin.com/in/batuhanderinbay"><img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555" alt="MIT License" /></a>
+  </p>
+</div>

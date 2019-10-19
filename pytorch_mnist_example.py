@@ -144,17 +144,8 @@ def test(args, model, device, test_loader):
     TrainTrack.cumulate_test_loss(test_loss)
     TrainTrack.cumulate_test_acc(correct / len(test_loader.dataset))
 
-
-# TrainTrack requires some modifications in the main method
-'''
-Args:
-    epoch: index of the current epoch
-    stop_train_flag: TrainTrack bool to check whether the user requested to stop
-                     the training process
-    lr: TrainTrack floating point value to change the learning rate (Initial value: None)
-'''
-def main():
-    # Training settings
+# Parsing in main function defined here as parse() method
+def parse():
     parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
     parser.add_argument('--batch-size', type=int, default=64, metavar='N',
                         help='input batch size for training (default: 64)')
@@ -175,6 +166,20 @@ def main():
 
     parser.add_argument('--save-model', action='store_true', default=False,
                         help='For Saving the current Model')
+
+    return parser
+
+# TrainTrack requires some modifications in the main method
+'''
+Args:
+    epoch: index of the current epoch
+    stop_train_flag: TrainTrack bool to check whether the user requested to stop
+                     the training process
+    lr: TrainTrack floating point value to change the learning rate (Initial value: None)
+'''
+def main():
+    # Training settings
+    parser = parse()
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
 

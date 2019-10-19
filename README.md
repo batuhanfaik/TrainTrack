@@ -1,7 +1,7 @@
 <h1 align="center">TrainTrack</h1>
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack">
-    <img src="/img/traintrack_logo.png" alt="TrainTrack" height="80" />
+    <img src="/img/logo.png" alt="TrainTrack" height="80" />
   </a>
 </p>
 <p align="center">
@@ -62,7 +62,7 @@ Origin of the bot and it's implementation on TenserFlow, Keras can be found on [
 
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack">
-    <img src="/img/screenshot.png" alt="TrainTrack Screenshot" height="240" />
+    <img src="/img/screenshot.png" alt="TrainTrack Screenshot" height="480" />
   </a>
 </p>
 

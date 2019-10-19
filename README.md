@@ -3,7 +3,7 @@
 <h1 align="center">TrainTrack</h1>
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack">
-    <img src="/img/logo.png" alt="TrainTrack" height="80" />
+    <img src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/logo.png" alt="TrainTrack" height="80" />
   </a>
 </p>
 <p align="center">
@@ -19,9 +19,9 @@
 <div class="badges_quality">
   <p align="center">
     <a href="https://www.codefactor.io/repository/github/batuhanfaik/traintrack"><img src="https://www.codefactor.io/repository/github/batuhanfaik/traintrack/badge?s=f80b4d54be8cacf5cdd84ed3b022758feef5804c" alt="CodeFactor" /></a>
-    <a href="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/"><img src="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/badges/quality-score.png?b=master&s=c04ea8230d0eceb057e7ce84cf663557fc4c23f5" alt="Scrutinizer Code Quality" /></a>
-    <a href="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/build-status/master"><img src="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/badges/build.png?b=master&s=96213f9f503a3d89c233b2aa976b9c169dcf8f29" alt="Build Status" /></a>
-    <a href="https://scrutinizer-ci.com/code-intelligence"><img src="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/badges/code-intelligence.svg?b=master&s=b0af3ba8b6ed4f0373456794e98ea534912645eb" alt="Code Intelligence Status" /></a>
+    <a href="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/"><img src="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality" /></a>
+    <a href="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/build-status/master"><img src="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/badges/build.png?b=master" alt="Build Status" /></a>
+    <a href="https://scrutinizer-ci.com/code-intelligence"><img src="https://scrutinizer-ci.com/g/batuhanfaik/TrainTrack/badges/code-intelligence.svg?b=master" alt="Code Intelligence Status" /></a>
   </p>
 </div>
 <div class="badges_repo">
@@ -65,7 +65,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack">
-    <img src="/img/screenshot.png" alt="TrainTrack Screenshot" height="240" />
+    <img src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/screenshot.png" alt="TrainTrack Screenshot" height="240" />
   </a>
 </p>
 
@@ -76,7 +76,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 <br/>
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack#features">
-    <img src="/img/update_messages.gif" alt="TrainTrack Update Messages" height="598" />
+    <img src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/update_messages.gif" alt="TrainTrack Update Messages" height="598" />
   </a>
 </p>
 </details>
@@ -86,7 +86,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 <br/>
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack#features">
-    <img src="/img/learning_rate.gif" alt="TrainTrack Learning Rate" height="598" />
+    <img src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/learning_rate.gif" alt="TrainTrack Learning Rate" height="598" />
   </a>
 </p>
 </details>
@@ -96,7 +96,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 <br/>
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack#features">
-    <img src="/img/status.gif" alt="TrainTrack Status Report" height="598" />
+    <img src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/status.gif" alt="TrainTrack Status Report" height="598" />
   </a>
 </p>
 </details>
@@ -106,7 +106,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 <br/>
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack#features">
-    <img src="/img/plot.gif" alt="TrainTrack Plot" height="598" />
+    <img src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/plot.gif" alt="TrainTrack Plot" height="598" />
   </a>
 </p>
 </details>
@@ -116,7 +116,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 <br/>
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack#features">
-    <img src="/img/stop.gif" alt="TrainTrack Stop" height="598" />
+    <img src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/stop.gif" alt="TrainTrack Stop" height="598" />
   </a>
 </p>
 </details>

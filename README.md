@@ -252,7 +252,7 @@ Each command is shown in the [Features](#features) section. Please refer to it s
 
 ## Roadmap
 
-See the [open issues](https://github.com/github_username/repo/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/batuhanfaik/TrainTrack/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 
@@ -266,7 +266,7 @@ Contributions are what make the open source community such an amazing place to b
 4.  Push to the Branch (`git push origin feature/new_feature`)
 5.  Open a Pull Request
 
-Keep in mind that pull requests are always welcome!
+Keep in mind that pull requests are **always** welcome!
 
 <!-- LICENSE -->
 

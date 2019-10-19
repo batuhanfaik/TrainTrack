@@ -15,11 +15,11 @@ Origin of the bot and it's implementation on TenserFlow, Keras can be found on [
  </div>
  <div class="badges_repo">
   <p align="center">
-    <a href="https://github.com/batuhanfaik/TrainTrack/graphs/contributors"><img src="https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square" alt="Contributors" /></a>
-    <a href="https://github.com/batuhanfaik/TrainTrack/network/members"><img src="https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square" alt="Forks" /></a>
-    <a href="https://github.com/batuhanfaik/TrainTrack/stargazers"><img src="https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square" alt="Stargazers" /></a>
-    <a href="https://github.com/batuhanfaik/TrainTrack/issues"><img src="https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square" alt="Issues" /></a>
-    <a href="https://github.com/batuhanfaik/TrainTrack/blob/master/LICENSE"><img src="https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square" alt="MIT License" /></a>
-    <a href="https://linkedin.com/in/batuhanderinbay"><img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555" alt="MIT License" /></a>
+    <a href="https://github.com/batuhanfaik/TrainTrack/graphs/contributors"><img src="https://img.shields.io/github/contributors/batuhanfaik/TrainTrack.svg?style=flat" alt="Contributors" /></a>
+    <a href="https://github.com/batuhanfaik/TrainTrack/network/members"><img src="https://img.shields.io/github/forks/batuhanfaik/TrainTrack.svg?style=flat" alt="Forks" /></a>
+    <a href="https://github.com/batuhanfaik/TrainTrack/stargazers"><img src="https://img.shields.io/github/stars/batuhanfaik/TrainTrack.svg?style=flat" alt="Stargazers" /></a>
+    <a href="https://github.com/batuhanfaik/TrainTrack/issues"><img src="https://img.shields.io/github/issues/batuhanfaik/TrainTrack.svg?style=flat" alt="Issues" /></a>
+    <a href="https://github.com/batuhanfaik/TrainTrack/blob/master/LICENSE"><img src="https://img.shields.io/github/license/batuhanfaik/TrainTrack.svg?style=flat" alt="MIT License" /></a>
+    <a href="https://linkedin.com/in/batuhanderinbay"><img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555" alt="LinkedIn" /></a>
   </p>
 </div>

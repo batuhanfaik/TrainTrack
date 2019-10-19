@@ -1,21 +1,8 @@
+<h1 align="center">TrainTrack</h1>
 
 <a href="https://github.com/batuhanfaik/TrainTrack">
   <img src="/img/traintrack_logo.png" align="right" alt="Train Track" height="80" />
 </a>
-
-# TrainTrack
-
-<p align="center">
-  A Telegram bot for controlling NN training process remotely!
-  <br />
-  <br />
-  <a style="font-size:24" href="https://github.com/batuhanfaik/TrainTrack/issues">Report Bug</a>
-  ·
-  <a href="https://github.com/batuhanfaik/TrainTrack/issues">Request Feature</a>
-  ·
-  <a href="mailto:batuhan@derinbay.com">Contact Me</a>
-</p>
-
 <br/>
 <div class="badges_quality">
   <p align="center">
@@ -35,6 +22,18 @@
     <a href="https://linkedin.com/in/batuhanderinbay"><img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555" alt="LinkedIn" /></a>
   </p>
 </div>
+<br/>
+<p align="center">
+  A Telegram bot for controlling NN training process remotely!
+  <br />
+  <br />
+  <a href="https://github.com/batuhanfaik/TrainTrack/issues">Report Bug</a>
+  ·
+  <a href="https://github.com/batuhanfaik/TrainTrack/issues">Request Feature</a>
+  ·
+  <a href="mailto:batuhan@derinbay.com">Contact Me</a>
+</p>
+<br/>
 
 <!-- TABLE OF CONTENTS -->
 

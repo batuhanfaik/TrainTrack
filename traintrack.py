@@ -102,7 +102,7 @@ class TrainTrack:
             CommandHandler("status", self._status, filters=self.filters))  # /get status
         dispatcher.add_handler(
             CommandHandler("plot", self._plot_loss, filters=self.filters))  # /plot loss
-        dispatcher.add_handler(CommandHandler("set_period", self._set_period, pass_args=True,
+        dispatcher.add_handler(CommandHandler("period", self._set_period, pass_args=True,
                                               filters=self.filters))  # /set frequency
         dispatcher.add_handler(self._prereport_handler())  # toggle on/off pre-report updates
         dispatcher.add_handler(self._lr_handler())  # set learning rate

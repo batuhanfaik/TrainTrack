@@ -17,7 +17,6 @@ from telegram.ext import (Updater, CommandHandler, Filters, ConversationHandler,
 
 try:
     import matplotlib
-
     matplotlib.use('Agg')  # Use Agg backend because the QObject is created outside main func
     from matplotlib import pyplot as plt
 except ImportError:
@@ -66,7 +65,8 @@ class TrainTrack:
                             level=logging.INFO)
         self.logger = logging.getLogger(__name__)
         # Message to display on /start and /help commands
-        self.startup_message = "Hello, this is TrainTrack! I will keep you updated on your training process.\n" \
+        self.startup_message = "Hello, this is TrainTrack! I will keep you updated on your " \
+                               "training process.\n" \
                                " Send /help to see all of the options\n" \
                                " Send /start to activate automatic updates every epoch\n" \
                                " Send /set_period <n> to send the updates every n\'th epoch\n" \
@@ -100,7 +100,7 @@ class TrainTrack:
         dispatcher.add_handler(
             CommandHandler("status", self._status, filters=self.filters))  # /get status
         dispatcher.add_handler(
-            CommandHandler("plot", self.plot_loss, filters=self.filters))  # /plot loss
+            CommandHandler("plot", self._plot_loss, filters=self.filters))  # /plot loss
         dispatcher.add_handler(CommandHandler("set_period", self._set_period, pass_args=True,
                                               filters=self.filters))  # /set frequency
         dispatcher.add_handler(self._prereport_handler())  # toggle on/off pre-report updates
@@ -159,22 +159,11 @@ class TrainTrack:
         else:
             print('Send message failed, user did not send /start')
 
-    def add_status(self, txt):
-        """ Function to set a status message to be returned by the /status command """
-        assert isinstance(txt, str), 'Status Message must be of type string'
-        self._status_message = txt
-        self.status_list.append(self._status_message)
-
-    # Method for clearing status list
     def clr_status(self):
         """Clears the status list"""
         self.status_list.clear()
 
-    def update_epoch(self, n_epoch):
-        """Current epoch index. Updated every epoch by trainer"""
-        assert isinstance(n_epoch, int), 'Number of epochs must be of type integer'
-        self.n_epoch = n_epoch
-
+    # Method for clearing status list
     def update_message(self, msg):
         """Sends the user current training messages if bot active"""
         assert isinstance(msg, str), 'Status Message must be of type string'
@@ -204,8 +193,20 @@ class TrainTrack:
         except (IndexError, ValueError):
             update.message.reply_text("Usage: /set_period <positive integer>")
 
+    def update_epoch(self, n_epoch):
+        """Current epoch index. Updated every epoch by trainer"""
+        assert isinstance(n_epoch, int), 'Number of epochs must be of type integer'
+        self.n_epoch = n_epoch
+
+    def add_status(self, txt):
+        """ Function to set a status message to be returned by the /status command """
+        assert isinstance(txt, str), 'Status Message must be of type string'
+        self._status_message = txt
+        self.status_list.append(self._status_message)
+
     def _status(self, update, context):
         """ Telegram bot callback for the /status command. Replies with the latest status"""
+        self._status_message = ""
         for state in self.status_list:
             self._status_message = self._status_message + "\n" + state
         update.message.reply_text(self._status_message)
@@ -275,7 +276,8 @@ class TrainTrack:
             update.message.reply_text(
                 'Learning rate is now under TrainTrack\'s control and is set to {}.'.format(
                     self.learning_rate))
-        reply_keyboard = [['X0.1', 'X0.5', 'X0.67', 'X1.5', 'X2', 'X10']]  # possible multipliers
+        reply_keyboard = [
+            ['X0.1', 'X0.5', 'X0.67', 'X1.5', 'X2', 'X10']]  # possible multipliers
         # Show message with option buttons
         update.message.reply_text(
             'Change learning rate, multiply by a factor of: '
@@ -393,7 +395,7 @@ class TrainTrack:
         self.test_acc.append(test_acc)
 
     # Plot accuracies and losses (cumulative)
-    def plot_loss(self, update, context):
+    def _plot_loss(self, update, context):
         """Telegram bot callback for the /plot command. Replies with a convergence plot image"""
         if plt is None:
             # matplotlib isn't installed

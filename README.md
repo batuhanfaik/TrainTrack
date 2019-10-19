@@ -72,6 +72,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 
 -   Get updates on loss, accuracy with personalized messages
 <details><summary><b>Show message commands</b></summary>
+<br/>
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack#features">
     <img src="/img/update_messages.gif" alt="TrainTrack Update Messages" height="598" />
@@ -80,13 +81,16 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 </details>
 -   Control the learning rate
 <details><summary><b>Show learning rate commands</b></summary>
+<br/>
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack#features">
     <img src="/img/learning_rate.gif" alt="TrainTrack Learning Rate" height="598" />
   </a>
 </p>
 </details>
--   Query the latest LR or metrics
+-   Query the latest metrics
+<details><summary><b>Show status command</b></summary>
+<br/>
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack#features">
     <img src="/img/status.gif" alt="TrainTrack Status Report" height="598" />
@@ -94,6 +98,8 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 </p>
 </details>
 -   Get loss, accuracy convergence plots
+<details><summary><b>Show plot command</b></summary>
+<br/>
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack#features">
     <img src="/img/plot.gif" alt="TrainTrack Plot" height="598" />
@@ -101,6 +107,8 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 </p>
 </details>
 -   Stop the training process
+<details><summary><b>Show stop command</b></summary>
+<br/>
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack#features">
     <img src="/img/stop.gif" alt="TrainTrack Stop" height="598" />

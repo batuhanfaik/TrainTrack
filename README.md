@@ -66,7 +66,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack">
-    <img src="/img/screenshot.png" alt="TrainTrack Screenshot" height="200" />
+    <img src="/img/screenshot.png" alt="TrainTrack Screenshot" height="240" />
   </a>
 </p>
 
@@ -121,6 +121,7 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
   </a>
 </p>
 </details>
+
 -   Limit access to a specific Telegram user ID
 
 ### Built with
@@ -132,17 +133,13 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 
 ## Getting Started
 
-Follow these guidelines to get your bot up and running.
+Follow these guidelines to get TrainTrack up and running!
 
 ### Prerequisites
 
--   [python-telegram-bot](https://pypi.org/project/python-telegram-bot/)
-Required for Telegram bot to function
--   [matplotlib](https://matplotlib.org/users/installing.html)
-Required for sending plots to the user
--   [torch](https://pytorch.org/get-started/locally/)
--   [torchvision](https://pypi.org/project/torchvision/)
-Required if you want to run pytorch_mnist_example.py
+-   [python-telegram-bot](https://pypi.org/project/python-telegram-bot/) | Required for Telegram bot to function
+-   [matplotlib](https://matplotlib.org/users/installing.html) | Required for sending plots to the user
+-   [torch](https://pytorch.org/get-started/locally/), [torchvision](https://pypi.org/project/torchvision/) | Required if you want to run pytorch_mnist_example.py
 
 ```sh
 pip install python-telegram-bot
@@ -157,14 +154,14 @@ pip install torch torchvision
 2. Clone this repository
 
 ```sh
-git clone https:://github.com/batuhanfaik/TrainTrack.git
+git clone https://github.com/batuhanfaik/TrainTrack.git
 ```
 
-3. Copy `traintrack.py` to your trainer destination
+3. Copy `traintrack.py` to your trainer's source file destination
 
 ```sh
 cd TrainTrack/
-cp traintrack.py /<your>/<training_dir>/
+cp traintrack.py /<your>/<training_dir>/<source_files>/
 ```
 
 4. Create a free Telegram bot using the Telegram app. Just follow [these](https://core.telegram.org/bots#6-botfather) instructions provided in the official Telegram bot documentation.
@@ -217,6 +214,8 @@ if TrainTrack.learning_rate is not None:
         param_group["lr"] = TrainTrack.learning_rate
 ```
 
+</details>
+
 -   Using TrainTrack's `update_prereport()`, `update_message()`, `add_status()`, `clr_status()` methods, you can control the messages that will be sent out by TrainTrack
 
 -   Using TrainTrack's `cumulate_<train/test>_<loss/acc>()` methods, you can cumulate your losses and
@@ -242,6 +241,8 @@ else:
 TrainTrack.stop_bot()
 ```
 
+</details>
+
 <!-- USAGE EXAMPLES -->
 
 ## Usage
@@ -258,13 +259,15 @@ See the [open issues](https://github.com/github_username/repo/issues) for a list
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**. PR's are always welcome!
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 1.  Fork the Project
 2.  Create your Feature Branch (`git checkout -b feature/new_feature`)
 3.  Commit your Changes (`git commit -m 'Added this new_feature'`)
 4.  Push to the Branch (`git push origin feature/new_feature`)
 5.  Open a Pull Request
+
+Keep in mind that pull requests are always welcome!
 
 <!-- LICENSE -->
 
@@ -276,7 +279,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-<h3 align="center">Batuhan Faik Derinbay<h3>
+<h3 align="center">Batuhan Faik Derinbay</h3>
 <p align="center">
   <a href="https://www.linkedin.com/in/batuhanderinbay/">LinkedIn</a>
   -

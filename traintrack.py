@@ -67,17 +67,18 @@ class TrainTrack:
         # Message to display on /start and /help commands
         self.startup_message = "Hello, this is TrainTrack! I will keep you updated on your " \
                                "training process.\n" \
-                               " Send /help to see all of the options\n" \
-                               " Send /start to activate automatic updates every epoch\n" \
-                               " Send /set_period <n> to send the updates every n\'th epoch\n" \
-                               " Send /toggle_prereport to turn on/off pre-report updates\n" \
-                               " Send /quiet to stop getting automatic updates\n" \
-                               " Send /getlr to query the current learning rate\n" \
-                               " Send /setlr to manually change learning rate\n" \
-                               " Send /dislr to disable the control of learning rate\n" \
-                               " Send /status to get the latest results\n" \
-                               " Send /plot to get a accuracy and loss convergence plot\n" \
-                               " Send /stop_training to stop training process\n\n"
+                               " Send /help to see all of the options\n"
+        self.help_message = "Send /help to see all of the options\n" \
+                            "Send /start to activate automatic updates every epoch\n" \
+                            "Send /period <n> to send the updates every n\'th epoch\n" \
+                            "Send /toggle_prereport to turn on/off pre-report updates\n" \
+                            "Send /quiet to stop getting automatic updates\n" \
+                            "Send /getlr to query the current learning rate\n" \
+                            "Send /setlr to manually change learning rate\n" \
+                            "Send /dislr to disable the control of learning rate\n" \
+                            "Send /status to get the latest results\n" \
+                            "Send /plot to get a accuracy and loss convergence plots\n" \
+                            "Send /stop to stop the training process\n\n"
 
     def activate_bot(self):
         """ Function to initiate the Telegram bot """
@@ -85,7 +86,7 @@ class TrainTrack:
         dispatcher = self.updater.dispatcher  # Get the dispatcher to register handlers
         dispatcher.add_error_handler(self._error)  # log all errors
         print("TrainTrack has been initiated.\n"
-              "Don\'t forget to start it on Telegram!\n")
+              "Don\'t forget to start it on Telegram using /start!\n")
 
         self.filters = Filters.user(user_id=self.user_id) if self.user_id else None
         # Command and conversation handles
@@ -131,7 +132,7 @@ class TrainTrack:
 
     def _help(self, update, context):
         """ Telegram bot callback for the /help command. Replies the startup message"""
-        update.message.reply_text(self.startup_message, reply_markup=ReplyKeyboardRemove())
+        update.message.reply_text(self.help_message, reply_markup=ReplyKeyboardRemove())
         self.chat_id = update.message.chat_id
 
     def _quiet(self, update, context):
@@ -144,9 +145,9 @@ class TrainTrack:
         """Log Errors caused by Updates."""
         self.logger.warning('Update "%s" caused error "%s"', update, context.error)
 
-    @classmethod
-    def _unknown(cls, update, context):
+    def _unknown(self, update, context):
         update.message.reply_text("Sorry! I didn't understand that command.")
+        update.message.reply_text(self.startup_message, reply_markup=ReplyKeyboardRemove())
 
     def send_message(self, txt):
         """ Function to send a Telegram message to user
@@ -333,7 +334,7 @@ class TrainTrack:
     # Stop training process callbacks
     @classmethod
     def _stop_training(cls, update, context):
-        """ Telegram bot callback for the /stop_training command. Displays
+        """ Telegram bot callback for the /stop command. Displays
             verification message with buttons"""
         reply_keyboard = [['Yes', 'No']]
         update.message.reply_text(
@@ -343,7 +344,7 @@ class TrainTrack:
         return 1
 
     def _stop_training_verify(self, update, context):
-        """ Telegram bot callback for the /stop_training command. Handle user
+        """ Telegram bot callback for the /stop command. Handle user
             selection as part of conversation"""
         is_sure = update.message.text  # Get response
         if is_sure == 'Yes':
@@ -360,7 +361,7 @@ class TrainTrack:
         return ConversationHandler.END
 
     def _cancel_stop(self, update, context):
-        """ Telegram bot callback for the /stoptraining command. Handle user
+        """ Telegram bot callback for the /stop command. Handle user
             cancellation as part of conversation"""
         self.stop_train_flag = False
         update.message.reply_text('OK, training will not be stopped.',
@@ -368,11 +369,10 @@ class TrainTrack:
         return ConversationHandler.END
 
     def _stop_handler(self):
-        """ Function to setup the callbacks for the /stoptraining command.
+        """ Function to setup the callbacks for the /stop command.
             Returns a conversation handler """
         conv_handler = ConversationHandler(
-            entry_points=[
-                CommandHandler('stop_training', self._stop_training, filters=self.filters)],
+            entry_points=[CommandHandler('stop', self._stop_training, filters=self.filters)],
             states={1: [MessageHandler(Filters.regex('^(Yes|No)$'), self._stop_training_verify)]},
             fallbacks=[CommandHandler('cancel', self._cancel_stop, filters=self.filters)])
         return conv_handler

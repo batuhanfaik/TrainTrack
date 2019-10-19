@@ -6,6 +6,7 @@
 </p>
 <p align="center">
   A Telegram bot for controlling NN training process remotely!
+  <br/>
   <a href="https://github.com/batuhanfaik/TrainTrack/issues">Report Bug</a>
   ·
   <a href="https://github.com/batuhanfaik/TrainTrack/issues">Request Feature</a>

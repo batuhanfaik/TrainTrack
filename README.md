@@ -60,6 +60,8 @@ API](https://github.com/python-telegram-bot/python-telegram-bot). It is develope
 
 Origin of the bot and it's implementation on TenserFlow, Keras can be found on [@eyalzk](https://eyalzk.github.io/)'s [GitHub repo](https://github.com/eyalzk/telegrad).
 
+An example implementation of the bot on [PyTorch MNIST example](https://github.com/pytorch/examples/tree/master/mnist) can be found in the source files. Read the source code thoroughly for better understanding its implementation on your neural network trainer. The code is well commented and points out each line of code you should implement in order for TrainTrack to function properly.
+
 <p align="center">
   <a href="https://github.com/batuhanfaik/TrainTrack">
     <img src="/img/screenshot.png" alt="TrainTrack Screenshot" height="480" />
@@ -69,10 +71,42 @@ Origin of the bot and it's implementation on TenserFlow, Keras can be found on [
 ### Features
 
 -   Get updates on loss, accuracy with personalized messages
+<details><summary><b>Show message commands</b></summary>
+<p align="center">
+  <a href="https://github.com/batuhanfaik/TrainTrack#features">
+    <img src="/img/update_messages.gif" alt="TrainTrack Update Messages" height="598" />
+  </a>
+</p>
+</details>
 -   Control the learning rate
+<details><summary><b>Show learning rate commands</b></summary>
+<p align="center">
+  <a href="https://github.com/batuhanfaik/TrainTrack#features">
+    <img src="/img/learning_rate.gif" alt="TrainTrack Learning Rate" height="598" />
+  </a>
+</p>
+</details>
 -   Query the latest LR or metrics
+<p align="center">
+  <a href="https://github.com/batuhanfaik/TrainTrack#features">
+    <img src="/img/status.gif" alt="TrainTrack Status Report" height="598" />
+  </a>
+</p>
+</details>
 -   Get loss, accuracy convergence plots
+<p align="center">
+  <a href="https://github.com/batuhanfaik/TrainTrack#features">
+    <img src="/img/plot.gif" alt="TrainTrack Plot" height="598" />
+  </a>
+</p>
+</details>
 -   Stop the training process
+<p align="center">
+  <a href="https://github.com/batuhanfaik/TrainTrack#features">
+    <img src="/img/stop.gif" alt="TrainTrack Stop" height="598" />
+  </a>
+</p>
+</details>
 -   Limit access to a specific Telegram user ID
 
 ### Built With

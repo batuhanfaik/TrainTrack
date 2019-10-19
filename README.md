@@ -31,7 +31,7 @@
     <a href="https://github.com/batuhanfaik/TrainTrack/stargazers"><img src="https://img.shields.io/github/stars/batuhanfaik/TrainTrack.svg?style=flat" alt="Stargazers" /></a>
     <a href="https://github.com/batuhanfaik/TrainTrack/issues"><img src="https://img.shields.io/github/issues/batuhanfaik/TrainTrack.svg?style=flat" alt="Issues" /></a>
     <a href="https://github.com/batuhanfaik/TrainTrack/blob/master/LICENSE"><img src="https://img.shields.io/github/license/batuhanfaik/TrainTrack.svg?style=flat" alt="MIT License" /></a>
-    <a href="https://linkedin.com/in/batuhanderinbay"><img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555" alt="LinkedIn" /></a>
+    <a href="https://linkedin.com/in/batuhanderinbay"><img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=flat&logo=linkedin&colorB=555" alt="LinkedIn" /></a>
   </p>
 </div>
 

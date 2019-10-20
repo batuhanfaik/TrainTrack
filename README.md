@@ -63,9 +63,13 @@ Origin of the bot and it's implementation on TenserFlow, Keras can be found on [
 
 An example implementation of the bot on [PyTorch MNIST example](https://github.com/pytorch/examples/tree/master/mnist) is in the source files under the filename `pytorch_mnist_example.py`. Read the source code thoroughly for better understanding its implementation on your neural network trainer. The example is well commented and points out each line of code you should implement in order for TrainTrack to function properly.
 
-<p align="center">
-  <a href="https://github.com/batuhanfaik/TrainTrack">
-    <img src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/screenshot.png" alt="TrainTrack Screenshot" height="240" />
+<p align="center"><a href="https://github.com/batuhanfaik/TrainTrack">
+  <img srcset="https://github.com/batuhanfaik/TrainTrack/blob/master/img/screenshot.png 2164w"
+             sizes="(max-width: 2164px) 240px,
+                    (max-width: 2164px) 320px,
+                    (max-width: 2164px) 480px,
+                    640px"
+             src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/screenshot.png" alt="TrainTrack Screenshot" width="640">
   </a>
 </p>
 
@@ -74,9 +78,13 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 -   Get updates on loss, accuracy with personalized messages
 <details><summary><b>Show message commands</b></summary>
 <br/>
-<p align="center">
-  <a href="https://github.com/batuhanfaik/TrainTrack#features">
-    <img src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/update_messages.gif" alt="TrainTrack Update Messages" height="598" />
+<p align="center"><a href="https://github.com/batuhanfaik/TrainTrack#features">
+  <img srcset="https://github.com/batuhanfaik/TrainTrack/blob/master/img/update_messages.gif 510w"
+             sizes="(max-width: 510px) 192px,
+                    (max-width: 510px) 256px,
+                    (max-width: 510px) 383px,
+                    510px"
+             src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/update_messages.gif" alt="TrainTrack Update Messages" width="510">
   </a>
 </p>
 </details>
@@ -84,9 +92,13 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 -   Control the learning rate
 <details><summary><b>Show learning rate commands</b></summary>
 <br/>
-<p align="center">
-  <a href="https://github.com/batuhanfaik/TrainTrack#features">
-    <img src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/learning_rate.gif" alt="TrainTrack Learning Rate" height="598" />
+<p align="center"><a href="https://github.com/batuhanfaik/TrainTrack#features">
+  <img srcset="https://github.com/batuhanfaik/TrainTrack/blob/master/img/learning_rate.gif 510w"
+             sizes="(max-width: 510px) 192px,
+                    (max-width: 510px) 256px,
+                    (max-width: 510px) 383px,
+                    510px"
+             src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/learning_rate.gif" alt="TrainTrack Update Messages" width="510">
   </a>
 </p>
 </details>
@@ -94,9 +106,13 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 -   Query the latest metrics
 <details><summary><b>Show status command</b></summary>
 <br/>
-<p align="center">
-  <a href="https://github.com/batuhanfaik/TrainTrack#features">
-    <img src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/status.gif" alt="TrainTrack Status Report" height="598" />
+<p align="center"><a href="https://github.com/batuhanfaik/TrainTrack#features">
+  <img srcset="https://github.com/batuhanfaik/TrainTrack/blob/master/img/status.gif 510w"
+             sizes="(max-width: 510px) 192px,
+                    (max-width: 510px) 256px,
+                    (max-width: 510px) 383px,
+                    510px"
+             src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/status.gif" alt="TrainTrack Update Messages" width="510">
   </a>
 </p>
 </details>
@@ -104,9 +120,13 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 -   Get loss, accuracy convergence plots
 <details><summary><b>Show plot command</b></summary>
 <br/>
-<p align="center">
-  <a href="https://github.com/batuhanfaik/TrainTrack#features">
-    <img src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/plot.gif" alt="TrainTrack Plot" height="598" />
+<p align="center"><a href="https://github.com/batuhanfaik/TrainTrack#features">
+  <img srcset="https://github.com/batuhanfaik/TrainTrack/blob/master/img/plot.gif 510w"
+             sizes="(max-width: 510px) 192px,
+                    (max-width: 510px) 256px,
+                    (max-width: 510px) 383px,
+                    510px"
+             src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/plot.gif" alt="TrainTrack Update Messages" width="510">
   </a>
 </p>
 </details>
@@ -114,9 +134,13 @@ An example implementation of the bot on [PyTorch MNIST example](https://github.c
 -   Stop the training process
 <details><summary><b>Show stop command</b></summary>
 <br/>
-<p align="center">
-  <a href="https://github.com/batuhanfaik/TrainTrack#features">
-    <img src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/stop.gif" alt="TrainTrack Stop" height="598" />
+<p align="center"><a href="https://github.com/batuhanfaik/TrainTrack#features">
+  <img srcset="https://github.com/batuhanfaik/TrainTrack/blob/master/img/stop.gif 510w"
+             sizes="(max-width: 510px) 192px,
+                    (max-width: 510px) 256px,
+                    (max-width: 510px) 383px,
+                    510px"
+             src="https://github.com/batuhanfaik/TrainTrack/blob/master/img/stop.gif" alt="TrainTrack Update Messages" width="510">
   </a>
 </p>
 </details>
@@ -270,7 +294,7 @@ Keep in mind that pull requests are **always** welcome!
 
 <!-- LICENSE -->
 
-## Licenses
+## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
